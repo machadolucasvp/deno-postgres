@@ -46,4 +46,18 @@ export default class BookDAOImpl implements BookDAO {
     return result.rowsOfObjects()[0];
   }
 
+  async put(book: Book): Promise<Book> {
+    const result = await Database.query({
+      text:
+      'update books set title=$2, isbn=$3 where id=$1',
+      args: [
+        book.id,
+        book.title,
+        book.isbn,
+      ]
+    })
+ 
+    return result.rowsOfObjects()[0];
+  }
+
 }
